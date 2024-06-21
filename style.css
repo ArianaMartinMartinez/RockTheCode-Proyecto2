@@ -4,6 +4,7 @@
     --white: #FFFAFA;
     --black: #1B1B1B;
     --red: #CB4C57;
+    --grey: #CCCCCC;
 }
 
 * {
@@ -49,11 +50,50 @@ header > ul {
     width: 60%;
 }
 
+/** MAIN **/
+main {
+    display: flex;
+    justify-content: center;
+    height: 80vh;
+    margin: 1rem;
+}
+
+/** PRODUCTS **/
+.products {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 70%;
+}
+
+.product {
+    width: 250px;
+}
+
+.imgProduct {
+    width: 200px;
+}
+
+.divStars {
+    display: flex;
+    justify-content: center;
+}
+
+.star {
+    width: 30px;
+    height: 30px;
+    background-color: var(--grey);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.filled {
+    background-color: var(--red);
+}
 
 /** FOOTER **/
 footer {
     background-color: var(--red);
-    position: absolute;
+    position: sticky;
     bottom: 0;
     width: 100%;
     color: var(--white);
