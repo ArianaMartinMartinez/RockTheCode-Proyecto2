@@ -56,7 +56,7 @@ const products = [
     {
       name: 'Urban Woman',
       price: 29,
-      stars: 2,
+      stars: 3,
       reviews: 250,
       seller: 'Lotus',
       image: 'https://dam.elcorteingles.es/producto/www-8430622822698-00.jpg?impolicy=Resize&width=967&height=1200',
@@ -83,13 +83,16 @@ const products = [
     {
       name: 'Creativity Circle',
       price: 69,
-      stars: 3,
+      stars: 2,
       reviews: 250,
       seller: 'Swarovski',
       image: 'https://dam.elcorteingles.es/producto/www-9009652017078-00.jpg?impolicy=Resize&width=967&height=1200',
       url: 'https://www.elcorteingles.es/moda-mujer/MP_0064667_5201707-pendientes-creativity-circle-banados-en-rodio-con-cristales-transparentes/?parentCategoryId=999.39072387013&color=Blanco',
     },
 ];
+
+// https://born2ride.netlify.app/
+// https://project2arianmobile.netlify.app/
 
 /** FILTER **/
 const SELLERS = [];
@@ -110,6 +113,7 @@ fillSellers(products);
 function createSellerFilter() {
   const sectionFilter = document.querySelector('.filter');
   const selectSeller = document.createElement('select');
+  selectSeller.className = 'selectSeller';
   
   const defaultOption = document.createElement('option');
   defaultOption.textContent = 'Filtrar marca';
@@ -136,6 +140,7 @@ function createSellerFilter() {
 function createPriceFilter() {
   const sectionFilter = document.querySelector('.filter');
   const inputPrice = document.createElement('input');
+  inputPrice.className = 'inputPrice';
 
   inputPrice.type = 'number';
   inputPrice.placeholder = '<€€€';
@@ -147,13 +152,19 @@ function createPriceFilter() {
     const price = parseFloat(inputPrice.value);
     selectedPrice = price;
 
-    filter();
+    filterProducts();
   });
 
   sectionFilter.appendChild(inputPrice);
   sectionFilter.appendChild(searchButton);
+
+  const buttonClean = document.createElement('button');
+  buttonClean.textContent = 'Limpiar filtros';
+  buttonClean.addEventListener('click', () => { cleanFilters(); });
+  sectionFilter.appendChild(buttonClean);
 }
 
+// Filter
 function filterProducts() {
   let filteredProducts = products;
 
@@ -168,6 +179,18 @@ function filterProducts() {
   printProducts(filteredProducts);
 }
 
+// Clean Filters
+function cleanFilters() {
+  const selectSeller = document.querySelector('.selectSeller');
+  const inputPrice = document.querySelector('.inputPrice');
+  
+  selectSeller.value = '';
+  inputPrice.value = '';
+  selectedSeller = '';
+  selectedPrice = NaN;
+
+  filterProducts();
+}
 
 createSellerFilter();
 createPriceFilter();
@@ -178,7 +201,7 @@ function printProducts(products) {
   const sectionProducts = document.querySelector('.products');
   sectionProducts.innerHTML = '';
 
-  if(products.length === 0) { showSuggestedProducts(); }
+  if(products.length === 0) { showSuggestedProducts(); return; }
 
   products.forEach(product => {
     const articleProduct = document.createElement('article');
@@ -196,7 +219,7 @@ function printProducts(products) {
     
     const divStartsProduct = document.createElement('div');
     divStartsProduct.className = 'divStars';
-    for(let i=0; i<5; i++) {
+    for(let i=1; i<=5; i++) {
       const star = document.createElement('div');
       star.className = 'star';
       if(i <= product.stars) {
@@ -215,8 +238,32 @@ function printProducts(products) {
   });
 }
 
-function showSuggestedProducts() {
-
-}
-
 printProducts(products);
+
+// Show suggested products when there are no products with the filters applied
+function showSuggestedProducts() {
+  const sectionProducts = document.querySelector('.products');
+
+  const divSuggestedProducts = document.createElement('div');
+  divSuggestedProducts.className = 'suggested';
+
+  const h2 = document.createElement('h2');
+  h2.textContent = 'Vaya... no hay productos para los filtros aplicados';
+  divSuggestedProducts.appendChild(h2);
+
+  const p = document.createElement('p');
+  p.textContent = 'Te dejamos con nuestros productos mejor valorados';
+  divSuggestedProducts.appendChild(p);
+  
+  const resultArray = products.filter((product) => product.stars >= 5);
+  printProducts(resultArray);
+
+  const divProducts = document.createElement('div');
+  const productArticles = document.querySelectorAll('.product');
+  productArticles.forEach(product => {
+    divProducts.appendChild(product);
+  });
+  divSuggestedProducts.appendChild(divProducts);
+
+  sectionProducts.appendChild(divSuggestedProducts);
+}
