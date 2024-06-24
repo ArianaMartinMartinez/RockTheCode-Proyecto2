@@ -19,6 +19,7 @@
 body {
     background-color: var(--white);
     color: var(--black);
+    height: 100%;
 }
 
 ul {
@@ -80,17 +81,40 @@ header > ul {
 main {
     display: flex;
     justify-content: center;
-    height: 100vh;
-    overflow: hidden;
     margin: 1rem;
+}
+
+/** FILTERS **/
+.filter {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 25px;
+}
+
+button {
+    background-color: var(--red);
+    color: var(--white);
+    font-size: medium;
+}
+
+button, input, select {
+    text-align: center;
+    padding: 5px;
+    border: 1px var(--red) solid;
+    border-radius: 8%;
+    cursor: pointer;
 }
 
 /** PRODUCTS **/
 .products {
     display: flex;
     justify-content: space-around;
+    align-items: center;
     flex-wrap: wrap;
+    height: fit-content;
     width: 70%;
+    margin-bottom: 80px;
 }
 
 .product {
@@ -100,6 +124,7 @@ main {
     align-items: center;
     flex-direction: column;
     gap: 10px;
+    margin: 5px;
 }
 
 .imgProduct {
@@ -145,7 +170,9 @@ main {
 /** FOOTER **/
 footer {
     background-color: var(--red);
+    position: fixed;
     bottom: 0;
+    left: 0;
     width: 100%;
     color: var(--white);
 }
@@ -153,6 +180,6 @@ footer {
 footer > ul {
     display: flex;
     justify-content: space-around;
-    height: 70px;
+    height: 60px;
     align-items: center;
 }

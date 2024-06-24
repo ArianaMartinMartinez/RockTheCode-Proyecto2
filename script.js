@@ -91,8 +91,6 @@ const products = [
     },
 ];
 
-// https://born2ride.netlify.app/
-// https://project2arianmobile.netlify.app/
 
 /** FILTER **/
 const SELLERS = [];
