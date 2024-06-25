@@ -31,6 +31,7 @@ a {
     color: var(--white);
 }
 
+
 /** SCROLLBAR **/
 /* width */
 ::-webkit-scrollbar {
@@ -54,6 +55,7 @@ a {
     background: var(--darkerRed); 
 }
 
+
 /** HEADER **/
 header {
     display: flex;
@@ -63,6 +65,7 @@ header {
     top: 0;
     color: var(--white);
     z-index: 1;
+    width: 100%;
 }
 
 .logo {
@@ -76,6 +79,7 @@ header > ul {
     align-items: center;
     width: 60%;
 }
+
 
 /** MAIN **/
 main {
@@ -123,6 +127,7 @@ button, input, select {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    text-align: center;
     gap: 10px;
     margin: 5px;
 }
@@ -159,6 +164,7 @@ button, input, select {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
     gap: 50px;
 }
 
@@ -166,6 +172,7 @@ button, input, select {
     display: flex;
     justify-content: space-around;
 }
+
 
 /** FOOTER **/
 footer {
@@ -182,4 +189,26 @@ footer > ul {
     justify-content: space-around;
     height: 60px;
     align-items: center;
+}
+
+
+/** RESPONSIVE **/
+@media (max-width: 450px) {
+    main {
+        flex-direction: column;
+        gap: 25px;
+        align-items: center;
+    }
+
+    header > ul {
+        display: none;
+    }
+
+    header {
+        justify-content: center;
+    }
+
+    .suggested > div {
+        flex-wrap: wrap;
+    }
 }
